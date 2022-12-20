@@ -1,6 +1,4 @@
-from transport import Transport
-
-
+from prod.model.entity.transport import Transport
 class Parking:
     DEFAULT_SIZE = 100
 
@@ -29,7 +27,9 @@ class Parking:
             raise Exception()
 
     def __setitem__(self, index, value):
-        if isinstance(index, int) and 0 <= index < len(self):
+        if (isinstance(index, int)
+                and 0 <= index < len(self)
+                and isinstance(value, Transport)):
             self._ls[index] = value
         else:
             raise Exception()
@@ -48,3 +48,4 @@ class Parking:
             for transport in self._ls:
                 msg += str(transport) + "\n"
             msg += f"There are {self._size - len(self)} empty places"
+            return msg
